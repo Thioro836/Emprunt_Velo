@@ -10,8 +10,8 @@ public class Camion extends Thread{
         //TODO Auto-generated constructor stub
     }
     public void run(){
-        while (turn  ) {
-            
+       // turn=false;
+        while (turn  ) {     
          // Le camion continue à faire sa tournée
                 try {
                     Thread.sleep(100);
@@ -20,11 +20,14 @@ public class Camion extends Thread{
                 }
                 sites[i].equilibreStock();
                 i++;
-                if(i==5){
+              
+                if(i==4){
                     i=0;
-                }
+                }         
                 
         }
+       
+        
     }
 
 }

@@ -5,7 +5,7 @@ public class Site {
     static final int BORNE_INF = 2;
     private int id_site;
     private int stock;
-    private int stockCamion = 20;  // Exemple de nombre de vélos dans le camion
+    private int stockCamion = 10;  
     private boolean isCamionPresent = false;  // Indique si le camion est présent
 
     public Site(int id_site) {
@@ -16,8 +16,8 @@ public class Site {
         return this.id_site;
     }
     public synchronized void empruntVelo() {
-       // System.out.println(Thread.currentThread().getName() + id_site+ " - Début de empruntVelo()");
-
+        System.out.println(Thread.currentThread().getName() + id_site+ " - Début de empruntVelo()");
+        //on utilise while parcequ'on veut être sure d'entrer lorsqu'on est réveillé (en gros on doit retester la condition)
         while (stock == 0 || isCamionPresent) {
             try {
                 wait();  // Attendre qu'un vélo soit disponible ou que le camion soit parti
@@ -34,8 +34,8 @@ public class Site {
     }
 
     public synchronized void depotVelo() {
-      //  System.out.println(Thread.currentThread().getName() + " - Début de depotVelo()");
-
+       System.out.println(Thread.currentThread().getName() + " - Début de depotVelo()");
+        //on utilise while parcequ'on veut être sure d'entrer lorsqu'on est réveillé (en gros on doit retester la condition)
         while (stock == STOCK_MAX || isCamionPresent) {
             try {
                 wait();  // Attendre qu'il y ait de la place pour déposer un vélo ou que le camion soit parti
@@ -48,7 +48,7 @@ public class Site {
         stock++;
         System.out.println(Thread.currentThread().getName() + " a déposé un vélo sur le site "+id_site +" Stock actuel : " + stock);
         
-        notifyAll();  // Réveiller d'autres clients ou le camion
+        notifyAll();  // pour être sure de  Réveiller d'autres clients ou le camion
     }
 
     public synchronized void equilibreStock() {
@@ -59,7 +59,7 @@ public class Site {
         if (stock > BORNE_SUP) {
             int surplus = stock - STOCK_INIT;
             stockCamion += surplus;   
-            stock = STOCK_INIT;  //faire un calcul
+             stock -= surplus ; 
             System.out.println("Camion a chargé " + surplus + " vélos. Stock réinitialisé à " + stock);
         } else if (stock < BORNE_INF && stockCamion > 0) {
             int deficit = STOCK_INIT - stock;
@@ -72,6 +72,6 @@ public class Site {
         }
 
         isCamionPresent = false;  // Le camion a fini, les clients peuvent utiliser le site
-        notifyAll();  // Réveiller les clients en attente
+        notifyAll();  // Réveiller tous les clients en attente 
     }
 }
