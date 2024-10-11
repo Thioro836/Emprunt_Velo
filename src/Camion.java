@@ -5,7 +5,7 @@ public class Camion extends Thread{
     int i=0;
     public Camion(Site[] sites) {
         this.sites=sites;
-        setDaemon(true);
+        //setDaemon(true);
       
         //TODO Auto-generated constructor stub
     }
@@ -14,6 +14,7 @@ public class Camion extends Thread{
         while (turn  ) {     
          // Le camion continue à faire sa tournée
                 try {
+                    
                     Thread.sleep(100);
                 } catch (Exception e) {
                     // TODO: handle exception

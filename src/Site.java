@@ -30,7 +30,7 @@ public class Site {
         stock--;
         System.out.println(Thread.currentThread().getName() +  " a emprunté un vélo sur le site "+ id_site + " Stock actuel : " + stock);
         
-        notifyAll();  // Réveiller d'autres clients ou le camion
+        notifyAll();  // on veut être sure de réveiller d'autres clients ou le camion
     }
 
     public synchronized void depotVelo() {

@@ -45,6 +45,7 @@ class SystemeEmprunt {
 			for (int i = 0; i < NB_CLIENTS; i++) {
 				clients[i].join();
 			}
+			camion.join();
 			
 	
 		} catch (InterruptedException e) {
