@@ -45,15 +45,13 @@ class SystemeEmprunt {
 			for (int i = 0; i < NB_CLIENTS; i++) {
 				clients[i].join();
 			}
-			camion.join();
-			
+			camion.turn=false;
 	
 		} catch (InterruptedException e) {
 			e.printStackTrace(); // Afficher l'exception si un thread est interrompu
 		}
 		
 	}
-  
 
   public static void main(String[] args) {
 	SystemeEmprunt e=

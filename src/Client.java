@@ -13,6 +13,7 @@ public class Client extends Thread {
    public void run() {
    
      try {
+      // calcul du trajet des cyclistes
       temps=Math.abs(siteDep.getId()-siteArr.getId());
       siteDep.empruntVelo();
       Thread.sleep(temps*1000); 
